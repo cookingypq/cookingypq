@@ -1,0 +1,64 @@
+{
+  "name": "cookingypq",
+  "version": "1.0.0",
+  "description": "复刻Patterns in the Void网站的现代化实现",
+  "type": "module",
+  "scripts": {
+    "dev": "bun run --bun vite",
+    "build": "bun run --bun vite build",
+    "preview": "bun run --bun vite preview",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint:fix": "eslint . --ext ts,tsx --fix",
+    "type-check": "tsc --noEmit",
+    "test": "bun test",
+    "test:watch": "bun test --watch",
+    "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx,json,css,md}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,tsx,js,jsx,json,css,md}\""
+  },
+  "dependencies": {
+    "@radix-ui/react-accordion": "^1.2.11",
+    "@radix-ui/react-alert-dialog": "^1.1.14",
+    "@radix-ui/react-slot": "^1.2.3",
+    "@types/react": "^18.2.37",
+    "@types/react-dom": "^18.2.15",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "framer-motion": "^10.16.5",
+    "gsap": "^3.12.2",
+    "lucide-react": "^0.536.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.20.1",
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss-animate": "^1.0.7",
+    "zustand": "^4.4.7"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^6.10.0",
+    "@typescript-eslint/parser": "^6.10.0",
+    "@vitejs/plugin-react": "^4.1.1",
+    "autoprefixer": "^10.4.16",
+    "eslint": "^8.53.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.4",
+    "postcss": "^8.4.31",
+    "prettier": "^3.0.3",
+    "tailwindcss": "^3.3.5",
+    "typescript": "^5.2.2",
+    "vite": "^4.5.0"
+  },
+  "engines": {
+    "bun": ">=1.0.0"
+  },
+  "keywords": [
+    "react",
+    "typescript",
+    "tailwindcss",
+    "8bit",
+    "retro",
+    "draggable",
+    "animations"
+  ],
+  "author": "CookingYPQ Team",
+  "license": "MIT"
+}
