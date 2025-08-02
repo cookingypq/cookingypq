@@ -3,6 +3,7 @@ import { SplitText } from '../components/animations/SplitText';
 import { GlitchText } from '../components/animations/GlitchText';
 import { TypewriterText } from '../components/animations/TypewriterText';
 import FuzzyText from '../components/animations/FuzzyText';
+import ScrambledText from '../components/animations/ScrambledText';
 import { DraggableCompanion } from '../components/draggable/DraggableCompanion';
 import { RetroButton } from '../components/ui/RetroButton';
 import { PixelCard } from '../components/ui/PixelCard';
@@ -18,7 +19,14 @@ export const Home: React.FC = () => {
         {/* 主标题区域 */}
         <div className="text-center mb-16">
           <h1 className="text-6xl md:text-8xl font-pixel text-white mb-8">
-            <SplitText text="CookingYPQ" />
+            <ScrambledText
+              radius={150}
+              duration={1.2}
+              speed={0.5}
+              scrambleChars=".:"
+            >
+              cookingypq
+            </ScrambledText>
           </h1>
           
           {/* Fuzzy Text 演示 */}
