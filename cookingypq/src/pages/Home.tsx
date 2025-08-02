@@ -6,6 +6,7 @@ import FuzzyText from '../components/animations/FuzzyText';
 import { DraggableCompanion } from '../components/draggable/DraggableCompanion';
 import { RetroButton } from '../components/ui/RetroButton';
 import { PixelCard } from '../components/ui/PixelCard';
+import { Button } from '../components/ui/8bit/button';
 
 export const Home: React.FC = () => {
   const [showGlitch, setShowGlitch] = useState(false);
@@ -13,13 +14,6 @@ export const Home: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
-      {/* 可拖拽伴偶 */}
-      <DraggableCompanion>
-        <div className="w-20 h-20 bg-green-500 border-4 border-white rounded-lg flex items-center justify-center text-white font-bold text-2xl shadow-lg">
-          🎮
-        </div>
-      </DraggableCompanion>
-
       <div className="container mx-auto px-4 py-8 relative z-10">
         {/* 主标题区域 */}
         <div className="text-center mb-16">
@@ -37,6 +31,19 @@ export const Home: React.FC = () => {
             >
               Fuzzy Text Effect
             </FuzzyText>
+          </div>
+
+          {/* 三个按钮 */}
+          <div className="flex justify-center space-x-4 mb-16">
+            <Button variant="outline" size="lg" onClick={() => alert('BLOG')}>
+              BLOG
+            </Button>
+            <Button variant="outline" size="lg" onClick={() => alert('X')}>
+              X
+            </Button>
+            <Button variant="outline" size="lg" onClick={() => alert('CODE')}>
+              CODE
+            </Button>
           </div>
         </div>
 
