@@ -8,14 +8,6 @@ export const Header: React.FC = () => {
         <Link to="/" className="text-2xl font-pixel text-green-400 hover:text-green-300">
           CookingYPQ
         </Link>
-        <nav className="hidden md:flex space-x-6">
-          <Link to="/" className="text-white hover:text-green-400 transition-colors">
-            首页
-          </Link>
-          <Link to="/about" className="text-white hover:text-green-400 transition-colors">
-            关于
-          </Link>
-        </nav>
       </div>
     </header>
   );
