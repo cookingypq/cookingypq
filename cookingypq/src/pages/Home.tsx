@@ -28,8 +28,9 @@ export const Home: React.FC = () => {
               hoverIntensity={0.5}
               enableHover={true}
               color="#FFFFFF"
+              fontSize="clamp(1.5rem, 6vw, 4rem)"
             >
-              Fuzzy Text Effect
+              love rust && zero-knowledge proof
             </FuzzyText>
           </div>
 
@@ -38,10 +39,18 @@ export const Home: React.FC = () => {
             <Button variant="outline" size="lg" onClick={() => alert('BLOG')}>
               BLOG
             </Button>
-            <Button variant="outline" size="lg" onClick={() => alert('X')}>
+            <Button 
+              variant="outline" 
+              size="lg" 
+              onClick={() => window.open('https://x.com/peiqing6888', '_blank')}
+            >
               X
             </Button>
-            <Button variant="outline" size="lg" onClick={() => alert('CODE')}>
+            <Button 
+              variant="outline" 
+              size="lg" 
+              onClick={() => window.open('https://github.com/cookingypq', '_blank')}
+            >
               CODE
             </Button>
           </div>
