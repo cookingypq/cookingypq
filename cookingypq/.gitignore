@@ -100,7 +100,7 @@ ehthumbs.db
 Thumbs.db
 
 # Bun
-bun.lockb
+# bun.lockb
 
 # Vite
 .vite/ 
