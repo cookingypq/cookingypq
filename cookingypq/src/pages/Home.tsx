@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SplitText } from '../components/animations/SplitText';
 import { GlitchText } from '../components/animations/GlitchText';
 import { TypewriterText } from '../components/animations/TypewriterText';
@@ -12,6 +12,21 @@ import { Button } from '../components/ui/8bit/button';
 export const Home: React.FC = () => {
   const [showGlitch, setShowGlitch] = useState(false);
   const [typingComplete, setTypingComplete] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  useEffect(() => {
+    // 确保组件已加载
+    setIsLoaded(true);
+    console.log('Home component loaded');
+  }, []);
+
+  if (!isLoaded) {
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <div className="text-2xl font-pixel">Loading...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">

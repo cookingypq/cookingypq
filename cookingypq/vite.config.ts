@@ -4,7 +4,7 @@ import { resolve } from 'path'
 
 export default defineConfig({
   plugins: [react()],
-  base: process.env.NODE_ENV === 'production' ? '/cookingypq/' : '/',
+  // 移除 base 配置，让 Vite 自动检测
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),
@@ -17,5 +17,15 @@ export default defineConfig({
   preview: {
     port: 4173,
     host: true,
+  },
+  build: {
+    // 添加构建优化
+    rollupOptions: {
+      output: {
+        manualChunks: undefined,
+      },
+    },
+    // 确保资源路径正确
+    assetsDir: 'assets',
   },
 })

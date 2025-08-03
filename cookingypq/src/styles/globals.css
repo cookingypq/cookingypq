@@ -1,3 +1,4 @@
+/* 字体预加载 */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 
 @tailwind base;
@@ -5,7 +6,7 @@
 @tailwind utilities;
 
 :root {
-  font-family: 'Courier New', monospace;
+  font-family: 'Courier New', 'Press Start 2P', monospace;
   line-height: 1.5;
   font-weight: 400;
   color-scheme: light dark;
@@ -22,18 +23,19 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background-color: #0a0a0a;
-  color: #ffffff;
+  background-color: #0a0a0a !important;
+  color: #ffffff !important;
 }
 
 #root {
   width: 100%;
   min-height: 100vh;
+  background-color: #0a0a0a;
 }
 
 /* 8-bit 字体类 */
 .font-pixel {
-  font-family: 'Press Start 2P', monospace;
+  font-family: 'Press Start 2P', 'Courier New', monospace;
   text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.8);
 }
 

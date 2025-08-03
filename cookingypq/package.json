@@ -7,6 +7,7 @@
     "dev": "bun run --bun vite",
     "build": "bun run --bun vite build",
     "preview": "bun run --bun vite preview",
+    "deploy": "bun run build && echo '✅ 构建完成！请将 dist 文件夹部署到你的平台'",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "lint:fix": "eslint . --ext ts,tsx --fix",
     "type-check": "tsc --noEmit",
