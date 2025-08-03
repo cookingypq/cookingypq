@@ -4,11 +4,6 @@
   "framework": "vite",
   "installCommand": "bun install",
   "devCommand": "bun run dev",
-  "functions": {
-    "app/api/**/*.ts": {
-      "runtime": "nodejs18.x"
-    }
-  },
   "rewrites": [
     {
       "source": "/(.*)",
