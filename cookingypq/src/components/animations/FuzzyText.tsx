@@ -9,6 +9,7 @@ interface FuzzyTextProps {
   enableHover?: boolean;
   baseIntensity?: number;
   hoverIntensity?: number;
+  className?: string;
 }
 
 const FuzzyText: React.FC<FuzzyTextProps> = ({
@@ -20,6 +21,7 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
   enableHover = true,
   baseIntensity = 0.18,
   hoverIntensity = 0.5,
+  className = "",
 }) => {
   const canvasRef = useRef<HTMLCanvasElement & { cleanupFuzzyText?: () => void}>(null);
 
@@ -204,7 +206,18 @@ const FuzzyText: React.FC<FuzzyTextProps> = ({
     hoverIntensity,
   ]);
 
-  return <canvas ref={canvasRef} />;
+  return (
+    <canvas 
+      ref={canvasRef} 
+      className={`block mx-auto ${className}`}
+      style={{ 
+        maxWidth: '100%', 
+        height: 'auto',
+        display: 'block',
+        margin: '0 auto'
+      }}
+    />
+  );
 };
 
 export default FuzzyText; 

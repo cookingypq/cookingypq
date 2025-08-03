@@ -31,26 +31,40 @@ export const Home: React.FC = () => {
           
           {/* Fuzzy Text 演示 */}
           <div className="mb-8 flex justify-center">
-            <FuzzyText 
-              baseIntensity={0.2}
-              hoverIntensity={0.5}
-              enableHover={true}
-              color="#FFFFFF"
-              fontSize="clamp(2rem, 5vw, 4rem)"
-              fontFamily="'Press Start 2P', monospace"
-            >
-              in rust && zero-knowledge proof
-            </FuzzyText>
+            <div className="max-w-full px-4 text-center">
+              <ScrambledText
+                radius={150}
+                duration={1.2}
+                speed={0.5}
+                scrambleChars=".:"
+                className="text-white font-pixel break-words leading-tight"
+                style={{
+                  fontSize: 'clamp(1rem, 4vw, 3rem)',
+                  fontFamily: "'Press Start 2P', monospace",
+                  fontWeight: 'bold'
+                }}
+              >
+                rust & zero-knowledge proof
+              </ScrambledText>
+            </div>
           </div>
 
           {/* 三个按钮 */}
-          <div className="flex justify-center space-x-4 mb-16">
-            <Button variant="outline" size="lg" onClick={() => alert('BLOG')}>
+          <div className="flex justify-center space-x-6 mb-16">
+            <Button 
+              variant="outline" 
+              size="lg" 
+              font="retro" 
+              className="min-w-[120px] text-lg font-bold"
+              onClick={() => alert('BLOG')}
+            >
               BLOG
             </Button>
             <Button 
               variant="outline" 
               size="lg" 
+              font="retro"
+              className="min-w-[120px] text-lg font-bold"
               onClick={() => window.open('https://x.com/peiqing6888', '_blank')}
             >
               X
@@ -58,6 +72,8 @@ export const Home: React.FC = () => {
             <Button 
               variant="outline" 
               size="lg" 
+              font="retro"
+              className="min-w-[120px] text-lg font-bold"
               onClick={() => window.open('https://github.com/cookingypq', '_blank')}
             >
               CODE
