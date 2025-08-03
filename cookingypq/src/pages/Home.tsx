@@ -30,15 +30,16 @@ export const Home: React.FC = () => {
           </h1>
           
           {/* Fuzzy Text 演示 */}
-          <div className="mb-8">
+          <div className="mb-8 flex justify-center">
             <FuzzyText 
               baseIntensity={0.2}
               hoverIntensity={0.5}
               enableHover={true}
               color="#FFFFFF"
-              fontSize="clamp(1.5rem, 6vw, 4rem)"
+              fontSize="clamp(2rem, 5vw, 4rem)"
+              fontFamily="'Press Start 2P', monospace"
             >
-              love rust && zero-knowledge proof
+              in rust && zero-knowledge proof
             </FuzzyText>
           </div>
 
@@ -62,87 +63,6 @@ export const Home: React.FC = () => {
               CODE
             </Button>
           </div>
-        </div>
-
-        {/* 特性展示区域 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <PixelCard 
-            title="复古8-bit风格" 
-            variant="success"
-            className="h-full"
-          >
-            <p className="text-sm text-white">采用经典的8-bit像素风格设计，营造复古游戏氛围</p>
-            <div className="mt-4">
-              <RetroButton size="sm" onClick={() => alert('8-bit风格已启用！')}>
-                了解更多
-              </RetroButton>
-            </div>
-          </PixelCard>
-
-          <PixelCard 
-            title="可拖拽伴偶" 
-            variant="default"
-            className="h-full"
-          >
-            <p className="text-sm text-white">页面上的游戏手柄图标可以自由拖拽，位置会自动保存</p>
-            <div className="mt-4">
-              <RetroButton size="sm" variant="secondary">
-                试试拖拽
-              </RetroButton>
-            </div>
-          </PixelCard>
-
-          <PixelCard 
-            title="现代技术栈" 
-            variant="warning"
-            className="h-full"
-          >
-            <p className="text-sm text-white">使用TypeScript + Tailwind CSS + Bun构建，性能优异</p>
-            <div className="mt-4">
-              <RetroButton size="sm" variant="secondary">
-                技术详情
-              </RetroButton>
-            </div>
-          </PixelCard>
-
-          <PixelCard 
-            title="文本动画效果" 
-            variant="error"
-            className="h-full"
-          >
-            <p className="text-sm text-white">包含SplitText、Typewriter、Glitch、Fuzzy等多种动画效果</p>
-            <div className="mt-4">
-              <RetroButton size="sm" variant="danger">
-                动画演示
-              </RetroButton>
-            </div>
-          </PixelCard>
-
-          <PixelCard 
-            title="响应式设计" 
-            variant="success"
-            className="h-full"
-          >
-            <p className="text-sm text-white">完美适配桌面、平板、手机等各种设备尺寸</p>
-            <div className="mt-4">
-              <RetroButton size="sm">
-                响应式测试
-              </RetroButton>
-            </div>
-          </PixelCard>
-
-          <PixelCard 
-            title="组件化架构" 
-            variant="default"
-            className="h-full"
-          >
-            <p className="text-sm text-white">高度模块化的组件设计，易于维护和扩展</p>
-            <div className="mt-4">
-              <RetroButton size="sm" variant="secondary">
-                组件文档
-              </RetroButton>
-            </div>
-          </PixelCard>
         </div>
       </div>
     </div>
