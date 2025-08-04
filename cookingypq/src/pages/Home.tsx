@@ -67,28 +67,28 @@ export const Home: React.FC = () => {
           {/* 三个按钮 */}
           <div className="flex justify-center space-x-6 mb-16">
             <Button 
-              variant="outline" 
+              variant="default" 
               size="lg" 
               font="retro" 
-              className="min-w-[120px] text-lg font-bold"
+              className="min-w-[120px] text-lg font-bold bg-black border border-white text-white"
               onClick={() => alert('BLOG')}
             >
               BLOG
             </Button>
             <Button 
-              variant="outline" 
+              variant="default" 
               size="lg" 
               font="retro"
-              className="min-w-[120px] text-lg font-bold"
+              className="min-w-[120px] text-lg font-bold bg-black border border-white text-white"
               onClick={() => window.open('https://x.com/peiqing6888', '_blank')}
             >
               X
             </Button>
             <Button 
-              variant="outline" 
+              variant="default" 
               size="lg" 
               font="retro"
-              className="min-w-[120px] text-lg font-bold"
+              className="min-w-[120px] text-lg font-bold bg-black border border-white text-white"
               onClick={() => window.open('https://github.com/cookingypq', '_blank')}
             >
               CODE
