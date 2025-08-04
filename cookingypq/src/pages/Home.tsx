@@ -8,6 +8,7 @@ import { DraggableCompanion } from '../components/draggable/DraggableCompanion';
 import { RetroButton } from '../components/ui/RetroButton';
 import { PixelCard } from '../components/ui/PixelCard';
 import { Button } from '../components/ui/8bit/button';
+import CurvedLoop from '../components/CurvedLoop';
 
 export const Home: React.FC = () => {
   const [showGlitch, setShowGlitch] = useState(false);
@@ -106,6 +107,18 @@ export const Home: React.FC = () => {
             >
               CODE
             </Button>
+          </div>
+
+          {/* CurvedLoop 组件 */}
+          <div className="w-full max-w-6xl mx-auto mb-16">
+            <CurvedLoop 
+              marqueeText="What? You haven't tried turning me yet? What? You haven't tried turning me yet?"
+              speed={2}
+              curveAmount={300}
+              direction="left"
+              interactive={true}
+              className="text-4xl md:text-6xl font-pixel"
+            />
           </div>
         </div>
       </div>
