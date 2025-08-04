@@ -34,9 +34,16 @@ const ScrambledText: React.FC<ScrambledTextProps> = ({
       charsClass: "inline-block will-change-transform",
     });
 
+    // 保存原始文本内容和尺寸
     split.chars.forEach((el) => {
       const c = el as HTMLElement;
-      gsap.set(c, { attr: { "data-content": c.innerHTML } });
+      c.setAttribute('data-original-width', c.offsetWidth.toString());
+      c.setAttribute('data-original-height', c.offsetHeight.toString());
+      gsap.set(c, { 
+        attr: { "data-content": c.innerHTML },
+        width: c.offsetWidth,
+        height: c.offsetHeight
+      });
     });
 
     const handleMove = (e: PointerEvent) => {
@@ -57,6 +64,13 @@ const ScrambledText: React.FC<ScrambledTextProps> = ({
               speed,
             },
             ease: "none",
+            onUpdate: function() {
+              // 确保字符尺寸保持稳定
+              const originalWidth = c.getAttribute('data-original-width');
+              const originalHeight = c.getAttribute('data-original-height');
+              if (originalWidth) c.style.width = originalWidth + 'px';
+              if (originalHeight) c.style.height = originalHeight + 'px';
+            }
           });
         }
       });
@@ -75,9 +89,13 @@ const ScrambledText: React.FC<ScrambledTextProps> = ({
     <div
       ref={rootRef}
       className={`inline-block ${className}`}
-      style={style}
+      style={{
+        ...style,
+        minWidth: 'fit-content',
+        width: 'max-content'
+      }}
     >
-      <p className="inline-block">{children}</p>
+      <p className="inline-block whitespace-nowrap">{children}</p>
     </div>
   );
 };

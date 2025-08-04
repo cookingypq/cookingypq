@@ -47,20 +47,33 @@ export const Home: React.FC = () => {
           {/* Fuzzy Text 演示 */}
           <div className="mb-8 flex justify-center">
             <div className="max-w-full px-4 text-center">
-              <ScrambledText
-                radius={150}
-                duration={1.2}
-                speed={0.5}
-                scrambleChars=".:"
-                className="text-white font-pixel break-words leading-tight"
+              <div 
+                className="inline-block"
                 style={{
-                  fontSize: 'clamp(1rem, 4vw, 3rem)',
-                  fontFamily: "'Press Start 2P', monospace",
-                  fontWeight: 'bold'
+                  minWidth: 'fit-content',
+                  width: 'max-content',
+                  position: 'relative'
                 }}
               >
-                rust & zero-knowledge proof
-              </ScrambledText>
+                <ScrambledText
+                  radius={150}
+                  duration={1.2}
+                  speed={0.5}
+                  scrambleChars=".:"
+                  className="text-white font-pixel leading-tight whitespace-nowrap"
+                  style={{
+                    fontSize: 'clamp(1rem, 4vw, 3rem)',
+                    fontFamily: "'Press Start 2P', monospace",
+                    fontWeight: 'bold',
+                    display: 'inline-block',
+                    minWidth: 'fit-content',
+                    position: 'relative',
+                    zIndex: 1
+                  }}
+                >
+                  rust & zero-knowledge proof
+                </ScrambledText>
+              </div>
             </div>
           </div>
 
