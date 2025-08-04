@@ -25,18 +25,39 @@ body {
   min-height: 100vh;
   background-color: #0a0a0a !important;
   color: #ffffff !important;
+  overflow-x: hidden;
 }
 
 #root {
   width: 100%;
   min-height: 100vh;
   background-color: #0a0a0a;
+  overflow-x: hidden;
 }
 
 /* 8-bit 字体类 */
 .font-pixel {
   font-family: 'Press Start 2P', 'Courier New', monospace;
   text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.8);
+}
+
+/* 手机端优化 */
+@media (max-width: 640px) {
+  .font-pixel {
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.8);
+  }
+  
+  /* 确保文本在手机上能正确换行 */
+  .break-words {
+    word-break: break-word;
+    hyphens: auto;
+  }
+  
+  /* 优化容器在手机上的显示 */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
 }
 
 /* 像素边框效果 */
