@@ -96,6 +96,22 @@ body {
     padding-left: 1rem;
     padding-right: 1rem;
   }
+  
+  /* 确保手机端元素正确居中 */
+  .text-center {
+    text-align: center !important;
+  }
+  
+  /* 确保手机端flex容器正确居中 */
+  .justify-center {
+    justify-content: center !important;
+  }
+  
+  /* 确保手机端元素不会偏右 */
+  .mx-auto {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
 }
 
 /* 像素边框效果 */

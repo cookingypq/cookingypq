@@ -46,9 +46,9 @@ export const Home: React.FC = () => {
           
           {/* Fuzzy Text 演示 */}
           <div className="mb-8 flex justify-center">
-            <div className="max-w-full px-6 text-center sm:px-4 text-stable">
+            <div className="max-w-full text-center text-stable">
               <div 
-                className="inline-block w-full sm:w-auto"
+                className="inline-block w-full"
                 style={{
                   minWidth: 'fit-content',
                   width: '100%',
@@ -60,7 +60,7 @@ export const Home: React.FC = () => {
                   duration={1.2}
                   speed={0.5}
                   scrambleChars=".:"
-                  className="text-white font-pixel leading-tight break-words hyphens-auto max-w-[85vw] mx-auto sm:max-w-none sm:whitespace-nowrap -translate-x-6 sm:translate-x-0"
+                  className="text-white font-pixel leading-tight break-words hyphens-auto max-w-[90vw] mx-auto sm:max-w-none sm:whitespace-nowrap"
                   style={{
                     fontSize: 'clamp(0.75rem, 3.5vw, 2.5rem)',
                     fontFamily: "'Press Start 2P', monospace",
@@ -90,7 +90,7 @@ export const Home: React.FC = () => {
               variant="default" 
               size="lg" 
               font="retro" 
-              className="w-[160px] sm:w-auto min-w-[120px] text-base sm:text-lg font-bold bg-black border border-white text-white px-4 py-2 sm:px-8 sm:py-3"
+              className="w-full max-w-[160px] sm:w-auto min-w-[120px] text-base sm:text-lg font-bold bg-black border border-white text-white px-4 py-2 sm:px-8 sm:py-3"
               onClick={() => alert('BLOG')}
             >
               BLOG
@@ -99,7 +99,7 @@ export const Home: React.FC = () => {
               variant="default" 
               size="lg" 
               font="retro"
-              className="w-[160px] sm:w-auto min-w-[120px] text-base sm:text-lg font-bold bg-black border border-white text-white px-4 py-2 sm:px-8 sm:py-3"
+              className="w-full max-w-[160px] sm:w-auto min-w-[120px] text-base sm:text-lg font-bold bg-black border border-white text-white px-4 py-2 sm:px-8 sm:py-3"
               onClick={() => window.open('https://x.com/peiqing6888', '_blank')}
             >
               X
@@ -108,7 +108,7 @@ export const Home: React.FC = () => {
               variant="default" 
               size="lg" 
               font="retro"
-              className="w-[160px] sm:w-auto min-w-[120px] text-base sm:text-lg font-bold bg-black border border-white text-white px-4 py-2 sm:px-8 sm:py-3"
+              className="w-full max-w-[160px] sm:w-auto min-w-[120px] text-base sm:text-lg font-bold bg-black border border-white text-white px-4 py-2 sm:px-8 sm:py-3"
               onClick={() => window.open('https://github.com/cookingypq', '_blank')}
             >
               CODE
