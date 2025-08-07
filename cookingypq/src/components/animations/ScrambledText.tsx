@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { SplitText } from "gsap/SplitText";
 import { ScrambleTextPlugin } from "gsap/ScrambleTextPlugin";
+import { useFontLoaded } from "../../hooks/useFontLoaded";
 
 gsap.registerPlugin(SplitText, ScrambleTextPlugin);
 
@@ -25,9 +26,10 @@ const ScrambledText: React.FC<ScrambledTextProps> = ({
   children,
 }) => {
   const rootRef = useRef<HTMLDivElement | null>(null);
+  const fontLoaded = useFontLoaded('Press Start 2P', 3000);
 
   useEffect(() => {
-    if (!rootRef.current) return;
+    if (!rootRef.current || !fontLoaded) return;
 
     const split = SplitText.create(rootRef.current.querySelector("p"), {
       type: "chars",
@@ -83,7 +85,24 @@ const ScrambledText: React.FC<ScrambledTextProps> = ({
       el.removeEventListener("pointermove", handleMove);
       split.revert();
     };
-  }, [radius, duration, speed, scrambleChars]);
+  }, [radius, duration, speed, scrambleChars, fontLoaded]);
+
+  // 在字体未加载时显示占位符，保持布局稳定
+  if (!fontLoaded) {
+    return (
+      <div
+        className={`inline-block ${className}`}
+        style={{
+          ...style,
+          minWidth: 'fit-content',
+          width: 'max-content',
+          visibility: 'hidden' // 保持空间占用但不可见
+        }}
+      >
+        <p className="inline-block whitespace-nowrap">{children}</p>
+      </div>
+    );
+  }
 
   return (
     <div

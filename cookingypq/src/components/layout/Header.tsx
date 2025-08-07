@@ -14,7 +14,7 @@ export const Header: React.FC = () => {
             hyphens: 'auto'
           }}
         >
-          CookingYPQ
+          peiqing.cook
         </Link>
       </div>
     </header>

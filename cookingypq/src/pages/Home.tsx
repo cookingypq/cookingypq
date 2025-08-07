@@ -1,18 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { SplitText } from '../components/animations/SplitText';
-import { GlitchText } from '../components/animations/GlitchText';
-import { TypewriterText } from '../components/animations/TypewriterText';
-import FuzzyText from '../components/animations/FuzzyText';
 import ScrambledText from '../components/animations/ScrambledText';
-import { DraggableCompanion } from '../components/draggable/DraggableCompanion';
-import { RetroButton } from '../components/ui/RetroButton';
-import { PixelCard } from '../components/ui/PixelCard';
 import { Button } from '../components/ui/8bit/button';
 import CurvedLoop from '../components/CurvedLoop';
 
 export const Home: React.FC = () => {
-  const [showGlitch, setShowGlitch] = useState(false);
-  const [typingComplete, setTypingComplete] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -33,8 +24,8 @@ export const Home: React.FC = () => {
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
       <div className="container mx-auto px-4 py-8 relative z-10">
         {/* 主标题区域 */}
-        <div className="text-center mb-16">
-          <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-8xl font-pixel text-white mb-8 leading-tight px-2">
+        <div className="text-center mb-16 title-container">
+          <h1 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-pixel text-white mb-8 leading-tight px-2 text-stable">
             <ScrambledText
               radius={150}
               duration={1.2}
@@ -42,19 +33,20 @@ export const Home: React.FC = () => {
               scrambleChars=".:"
               className="break-words hyphens-auto"
               style={{
-                fontSize: 'clamp(1.5rem, 8vw, 8rem)',
-                lineHeight: '1.1',
+                fontSize: 'clamp(1.2rem, 6vw, 5rem)',
+                lineHeight: '1.2',
                 wordBreak: 'break-word',
-                hyphens: 'auto'
+                hyphens: 'auto',
+                fontWeight: 'normal'
               }}
             >
-              cookingypq
+              peiqing.cook
             </ScrambledText>
           </h1>
           
           {/* Fuzzy Text 演示 */}
           <div className="mb-8 flex justify-center">
-            <div className="max-w-full px-6 text-center sm:px-4">
+            <div className="max-w-full px-6 text-center sm:px-4 text-stable">
               <div 
                 className="inline-block w-full sm:w-auto"
                 style={{
@@ -132,6 +124,20 @@ export const Home: React.FC = () => {
               direction="left"
               interactive={true}
               className="text-lg sm:text-2xl md:text-3xl lg:text-4xl xl:text-6xl font-pixel"
+            />
+          </div>
+
+          {/* GIF 图片区域 */}
+          <div className="flex justify-center mb-16 mt-8">
+            <img 
+              src="/gif/GutsVsGriffithBerserk-ezgif.com-loop-count.gif"
+              alt="Guts vs Griffith Berserk"
+              className="max-w-full h-auto"
+              style={{
+                maxWidth: 'clamp(300px, 70vw, 800px)',
+                height: 'auto',
+                objectFit: 'contain'
+              }}
             />
           </div>
         </div>
