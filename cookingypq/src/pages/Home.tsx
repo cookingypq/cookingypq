@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import ScrambledText from '../components/animations/ScrambledText';
 import { Button } from '../components/ui/8bit/button';
+
 import CurvedLoop from '../components/CurvedLoop';
 
 export const Home: React.FC = () => {
   const [isLoaded, setIsLoaded] = useState(false);
+
+
 
   useEffect(() => {
     // 确保组件已加载
@@ -127,19 +130,78 @@ export const Home: React.FC = () => {
             />
           </div>
 
-          {/* GIF 图片区域 */}
-          <div className="flex justify-center mb-16 mt-8">
-            <img 
-              src="/gif/GutsVsGriffithBerserk-ezgif.com-loop-count.gif"
-              alt="Guts vs Griffith Berserk"
-              className="max-w-full h-auto"
-              style={{
-                maxWidth: 'clamp(300px, 70vw, 800px)',
-                height: 'auto',
-                objectFit: 'contain'
-              }}
-            />
+          {/* Tesla-asr-black GIF 按钮 */}
+          <div className="flex justify-center mb-16">
+            <Button 
+              variant="ghost" 
+              size="lg" 
+              font="retro"
+              className="relative overflow-hidden bg-transparent border-none hover:bg-transparent transition-all duration-300 p-0 h-auto"
+              onClick={() => window.open('https://nockchain.com', '_blank')}
+            >
+              <img 
+                src="/gif/tesla-asr-black.gif"
+                alt="Tesla-asr-black"
+                className="block hover:scale-105 transition-transform duration-300"
+                style={{
+                  width: 'clamp(250px, 60vw, 500px)',
+                  height: 'auto',
+                  maxWidth: '500px',
+                  objectFit: 'contain'
+                }}
+              />
+            </Button>
           </div>
+
+          {/* Nockchain Shovel GIF 按钮 */}
+          <div className="flex justify-center mb-16">
+            <Button 
+              variant="ghost" 
+              size="lg" 
+              font="retro"
+              className="relative overflow-hidden bg-transparent border-none hover:bg-transparent transition-all duration-300 p-0 h-auto"
+              onClick={() => window.open('https://nockchain.com', '_blank')}
+            >
+              <img 
+                src="/gif/nockchain.png"
+                alt="Nockchain Shovel"
+                className="block hover:scale-105 transition-transform duration-300"
+                style={{
+                  width: 'clamp(250px, 60vw, 500px)',
+                  height: 'auto',
+                  maxWidth: '500px',
+                  objectFit: 'contain'
+                }}
+              />
+            </Button>
+          </div>
+
+          {/* 保时捷博物馆 GIF 按钮 */}
+          <div className="flex justify-center mb-16">
+            <Button 
+              variant="ghost" 
+              size="lg" 
+              font="retro"
+              className="relative overflow-hidden bg-transparent border-none hover:bg-transparent transition-all duration-300 p-0 h-auto"
+              onClick={() => window.open('https://porsche.com/museum', '_blank')}
+            >
+              <img 
+                src="/gif/porsche-museum.gif"
+                alt="Porsche Museum - 25 Years"
+                className="block hover:scale-105 transition-transform duration-300"
+                style={{
+                  width: 'clamp(250px, 60vw, 500px)',
+                  height: 'auto',
+                  maxWidth: '500px',
+                  objectFit: 'contain'
+                }}
+              />
+            </Button>
+          </div>
+
+
+
+
         </div>
       </div>
     </div>
