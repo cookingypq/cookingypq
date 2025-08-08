@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ScrambledText from '../components/animations/ScrambledText';
 import { Button } from '../components/ui/8bit/button';
+import { FloatingButton } from '../components/animations/FloatingButton';
 
 import CurvedLoop from '../components/CurvedLoop';
 
@@ -132,71 +133,77 @@ export const Home: React.FC = () => {
 
           {/* Tesla-asr-black GIF 按钮 */}
           <div className="flex justify-center mb-16">
-            <Button 
-              variant="ghost" 
-              size="lg" 
-              font="retro"
-              className="relative overflow-hidden bg-transparent border-none hover:bg-transparent transition-all duration-300 p-0 h-auto"
-              onClick={() => window.open('https://nockchain.com', '_blank')}
-            >
-              <img 
-                src="/gif/tesla-asr-black.gif"
-                alt="Tesla-asr-black"
-                className="block hover:scale-105 transition-transform duration-300"
-                style={{
-                  width: 'clamp(250px, 60vw, 500px)',
-                  height: 'auto',
-                  maxWidth: '500px',
-                  objectFit: 'contain'
-                }}
-              />
-            </Button>
+            <FloatingButton animationType="irregular">
+              <Button 
+                variant="ghost" 
+                size="lg" 
+                font="retro"
+                className="relative overflow-hidden bg-transparent border-none hover:bg-transparent transition-all duration-300 p-0 h-auto"
+                onClick={() => window.open('https://nockchain.com', '_blank')}
+              >
+                <img 
+                  src="/gif/tesla-asr-black.gif"
+                  alt="Tesla-asr-black"
+                  className="block hover:scale-105 transition-transform duration-300"
+                  style={{
+                    width: 'clamp(250px, 60vw, 500px)',
+                    height: 'auto',
+                    maxWidth: '500px',
+                    objectFit: 'contain'
+                  }}
+                />
+              </Button>
+            </FloatingButton>
           </div>
 
           {/* Nockchain Shovel GIF 按钮 */}
           <div className="flex justify-center mb-16">
-            <Button 
-              variant="ghost" 
-              size="lg" 
-              font="retro"
-              className="relative overflow-hidden bg-transparent border-none hover:bg-transparent transition-all duration-300 p-0 h-auto"
-              onClick={() => window.open('https://nockchain.com', '_blank')}
-            >
-              <img 
-                src="/gif/nockchain.png"
-                alt="Nockchain Shovel"
-                className="block hover:scale-105 transition-transform duration-300"
-                style={{
-                  width: 'clamp(250px, 60vw, 500px)',
-                  height: 'auto',
-                  maxWidth: '500px',
-                  objectFit: 'contain'
-                }}
-              />
-            </Button>
+            <FloatingButton animationType="leftToRight">
+              <Button 
+                variant="ghost" 
+                size="lg" 
+                font="retro"
+                className="relative overflow-hidden bg-transparent border-none hover:bg-transparent transition-all duration-300 p-0 h-auto"
+                onClick={() => window.open('https://github.com/cookingypq/NqkXprv', '_blank')}
+              >
+                <img 
+                  src="/gif/nockchain.png"
+                  alt="Nockchain Shovel"
+                  className="block hover:scale-105 transition-transform duration-300"
+                  style={{
+                    width: 'clamp(125px, 30vw, 250px)',
+                    height: 'auto',
+                    maxWidth: '250px',
+                    objectFit: 'contain'
+                  }}
+                />
+              </Button>
+            </FloatingButton>
           </div>
 
           {/* 保时捷博物馆 GIF 按钮 */}
           <div className="flex justify-center mb-16">
-            <Button 
-              variant="ghost" 
-              size="lg" 
-              font="retro"
-              className="relative overflow-hidden bg-transparent border-none hover:bg-transparent transition-all duration-300 p-0 h-auto"
-              onClick={() => window.open('https://porsche.com/museum', '_blank')}
-            >
-              <img 
-                src="/gif/porsche-museum.gif"
-                alt="Porsche Museum - 25 Years"
-                className="block hover:scale-105 transition-transform duration-300"
-                style={{
-                  width: 'clamp(250px, 60vw, 500px)',
-                  height: 'auto',
-                  maxWidth: '500px',
-                  objectFit: 'contain'
-                }}
-              />
-            </Button>
+            <FloatingButton animationType="rightToLeft">
+              <Button 
+                variant="ghost" 
+                size="lg" 
+                font="retro"
+                className="relative overflow-hidden bg-transparent border-none hover:bg-transparent transition-all duration-300 p-0 h-auto"
+                onClick={() => window.open('https://porsche.com/museum', '_blank')}
+              >
+                <img 
+                  src="/gif/porsche-museum.gif"
+                  alt="Porsche Museum - 25 Years"
+                  className="block hover:scale-105 transition-transform duration-300"
+                  style={{
+                    width: 'clamp(170px, 40vw, 300px)',
+                    height: 'auto',
+                    maxWidth: '300px',
+                    objectFit: 'contain'
+                  }}
+                />
+              </Button>
+            </FloatingButton>
           </div>
 
 
