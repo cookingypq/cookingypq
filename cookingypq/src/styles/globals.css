@@ -192,6 +192,61 @@ body {
   80% { transform: translate(-2px, 2px); }
 }
 
+/* 浮动按钮动画 */
+.floating-button {
+  position: relative;
+  transition: transform 0.1s ease-out;
+}
+
+/* 从左到右的波浪运动 */
+@keyframes floatLeftToRight {
+  0% {
+    transform: translate(-50vw, 40px);
+  }
+  25% {
+    transform: translate(-25vw, -60px);
+  }
+  50% {
+    transform: translate(0vw, 80px);
+  }
+  75% {
+    transform: translate(25vw, -40px);
+  }
+  100% {
+    transform: translate(50vw, 20px);
+  }
+}
+
+/* 从右到左的斜线波浪运动 */
+@keyframes floatRightToLeft {
+  0% {
+    transform: translate(50vw, -60px);
+  }
+  20% {
+    transform: translate(30vw, 50px);
+  }
+  40% {
+    transform: translate(10vw, -30px);
+  }
+  60% {
+    transform: translate(-10vw, 70px);
+  }
+  80% {
+    transform: translate(-30vw, -20px);
+  }
+  100% {
+    transform: translate(-50vw, 40px);
+  }
+}
+
+.floating-left-to-right {
+  animation: floatLeftToRight 20s linear infinite;
+}
+
+.floating-right-to-left {
+  animation: floatRightToLeft 25s linear infinite;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     color: #213547;
