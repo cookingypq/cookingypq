@@ -133,7 +133,7 @@ export const Home: React.FC = () => {
 
           {/* Tesla-asr-black GIF 按钮 */}
           <div className="flex justify-center mb-16">
-            <FloatingButton animationType="irregular">
+            <FloatingButton animationType="celestialOrbit">
               <Button 
                 variant="ghost" 
                 size="lg" 
@@ -158,7 +158,7 @@ export const Home: React.FC = () => {
 
           {/* Nockchain Shovel GIF 按钮 */}
           <div className="flex justify-center mb-16">
-            <FloatingButton animationType="leftToRight">
+            <FloatingButton animationType="celestialOrbit">
               <Button 
                 variant="ghost" 
                 size="lg" 
@@ -183,7 +183,7 @@ export const Home: React.FC = () => {
 
           {/* 保时捷博物馆 GIF 按钮 */}
           <div className="flex justify-center mb-16">
-            <FloatingButton animationType="rightToLeft">
+            <FloatingButton animationType="celestialOrbit">
               <Button 
                 variant="ghost" 
                 size="lg" 
@@ -208,7 +208,7 @@ export const Home: React.FC = () => {
 
           {/* 黑魂3 GIF 按钮 */}
           <div className="flex justify-center mb-16">
-            <FloatingButton animationType="sineWave">
+            <FloatingButton animationType="celestialOrbit">
               <Button 
                 variant="ghost" 
                 size="lg" 
@@ -217,13 +217,13 @@ export const Home: React.FC = () => {
                 onClick={() => window.open('https://www.darksouls3.com', '_blank')}
               >
                 <img 
-                  src="/gif/darksoul.gif"
+                  src="/gif/darksoul-white.gif"
                   alt="Dark Souls 3"
                   className="block hover:scale-105 transition-transform duration-300"
                   style={{
-                    width: 'clamp(170px, 40vw, 300px)',
+                    width: 'clamp(120px, 30vw, 300px)',
                     height: 'auto',
-                    maxWidth: '300px',
+                    maxWidth: '200px',
                     objectFit: 'contain'
                   }}
                 />
@@ -233,7 +233,7 @@ export const Home: React.FC = () => {
 
           {/* 血源 GIF 按钮 */}
           <div className="flex justify-center mb-16">
-            <FloatingButton animationType="cosineWave">
+            <FloatingButton animationType="celestialOrbit">
               <Button 
                 variant="ghost" 
                 size="lg" 
@@ -258,17 +258,17 @@ export const Home: React.FC = () => {
 
           {/* 只狼 GIF 按钮 */}
           <div className="flex justify-center mb-16">
-            <FloatingButton animationType="rightToLeft">
+            <FloatingButton animationType="celestialOrbit">
               <Button 
                 variant="ghost" 
                 size="lg" 
                 font="retro"
                 className="relative overflow-hidden bg-transparent border-none hover:bg-transparent transition-all duration-300 p-0 h-auto"
-                onClick={() => window.open('https://porsche.com/museum', '_blank')}
+                onClick={() => window.open('https://www.sekiro.jp/', '_blank')}
               >
                 <img 
                   src="/gif/sekiro.gif"
-                  alt="Porsche Museum - 25 Years"
+                  alt="Sekiro: Shadows Die Twice"
                   className="block hover:scale-105 transition-transform duration-300"
                   style={{
                     width: 'clamp(170px, 40vw, 300px)',
@@ -283,7 +283,7 @@ export const Home: React.FC = () => {
 
           {/* 老头环 GIF 按钮 */}
           <div className="flex justify-center mb-16">
-            <FloatingButton animationType="figure8">
+            <FloatingButton animationType="celestialOrbit">
               <Button 
                 variant="ghost" 
                 size="lg" 
