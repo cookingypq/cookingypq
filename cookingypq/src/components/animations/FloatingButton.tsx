@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 interface FloatingButtonProps {
   children: React.ReactNode;
@@ -12,6 +12,83 @@ export const FloatingButton: React.FC<FloatingButtonProps> = ({
   className = ''
 }) => {
   const buttonRef = useRef<HTMLDivElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+  const [isDragged, setIsDragged] = useState(false);
+
+  // 拖拽相关状态
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
+  const [currentPosition, setCurrentPosition] = useState({ x: 0, y: 0 });
+
+  // 处理鼠标按下事件
+  const handleMouseDown = (e: React.MouseEvent) => {
+    setIsDragging(true);
+    const rect = buttonRef.current?.getBoundingClientRect();
+    if (rect) {
+      setDragStart({
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top
+      });
+    }
+  };
+
+  // 处理鼠标移动事件
+  const handleMouseMove = (e: MouseEvent) => {
+    if (!isDragging || !buttonRef.current) return;
+    
+    const newX = e.clientX - dragStart.x;
+    const newY = e.clientY - dragStart.y;
+    
+    setCurrentPosition({ x: newX, y: newY });
+    
+    // 实时更新按钮位置
+    buttonRef.current.style.transform = `translate(${newX}px, ${newY}px)`;
+  };
+
+  // 处理鼠标松开事件
+  const handleMouseUp = () => {
+    if (isDragging) {
+      setIsDragging(false);
+      setIsDragged(true);
+      
+      // 保存拖拽后的偏移量
+      setDragOffset(currentPosition);
+      
+      // 重置transform，让动画从新位置开始
+      if (buttonRef.current) {
+        buttonRef.current.style.transform = '';
+      }
+    }
+  };
+
+  // 添加全局鼠标事件监听
+  useEffect(() => {
+    if (isDragging) {
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
+      
+      return () => {
+        document.removeEventListener('mousemove', handleMouseMove);
+        document.removeEventListener('mouseup', handleMouseUp);
+      };
+    }
+  }, [isDragging, dragStart, currentPosition]);
+
+  // 防止拖拽时选中文本
+  useEffect(() => {
+    if (isDragging) {
+      document.body.style.userSelect = 'none';
+      document.body.style.cursor = 'grabbing';
+    } else {
+      document.body.style.userSelect = '';
+      document.body.style.cursor = '';
+    }
+    
+    return () => {
+      document.body.style.userSelect = '';
+      document.body.style.cursor = '';
+    };
+  }, [isDragging]);
 
   useEffect(() => {
     if (!buttonRef.current) return;
@@ -31,7 +108,15 @@ export const FloatingButton: React.FC<FloatingButtonProps> = ({
         const x = Math.sin(elapsed * 0.001) * 100 + Math.sin(elapsed * 0.0007) * 50;
         const y = Math.cos(elapsed * 0.0008) * 80 + Math.sin(elapsed * 0.0012) * 40;
         
-        button.style.transform = `translate(${x}px, ${y}px)`;
+        // 如果按钮被拖拽过，从拖拽后的位置开始运动
+        let finalX = x;
+        let finalY = y;
+        if (isDragged) {
+          finalX += dragOffset.x;
+          finalY += dragOffset.y;
+        }
+        
+        button.style.transform = `translate(${finalX}px, ${finalY}px)`;
         
         animationId = requestAnimationFrame(animate);
       };
@@ -56,7 +141,15 @@ export const FloatingButton: React.FC<FloatingButtonProps> = ({
         const x = Math.sin(elapsed * 0.001) * 80;
         const y = Math.sin(elapsed * 0.0008) * 40;
         
-        button.style.transform = `translate(${x}px, ${y}px)`;
+        // 如果按钮被拖拽过，从拖拽后的位置开始运动
+        let finalX = x;
+        let finalY = y;
+        if (isDragged) {
+          finalX += dragOffset.x;
+          finalY += dragOffset.y;
+        }
+        
+        button.style.transform = `translate(${finalX}px, ${finalY}px)`;
         
         animationId = requestAnimationFrame(animate);
       };
@@ -81,7 +174,15 @@ export const FloatingButton: React.FC<FloatingButtonProps> = ({
         const x = Math.cos(elapsed * 0.001) * 70;
         const y = Math.cos(elapsed * 0.0012) * 50;
         
-        button.style.transform = `translate(${x}px, ${y}px)`;
+        // 如果按钮被拖拽过，从拖拽后的位置开始运动
+        let finalX = x;
+        let finalY = y;
+        if (isDragged) {
+          finalX += dragOffset.x;
+          finalY += dragOffset.y;
+        }
+        
+        button.style.transform = `translate(${finalX}px, ${finalY}px)`;
         
         animationId = requestAnimationFrame(animate);
       };
@@ -108,7 +209,15 @@ export const FloatingButton: React.FC<FloatingButtonProps> = ({
         const x = Math.cos(angle) * radius;
         const y = Math.sin(angle) * radius;
         
-        button.style.transform = `translate(${x}px, ${y}px)`;
+        // 如果按钮被拖拽过，从拖拽后的位置开始运动
+        let finalX = x;
+        let finalY = y;
+        if (isDragged) {
+          finalX += dragOffset.x;
+          finalY += dragOffset.y;
+        }
+        
+        button.style.transform = `translate(${finalX}px, ${finalY}px)`;
         
         animationId = requestAnimationFrame(animate);
       };
@@ -134,7 +243,15 @@ export const FloatingButton: React.FC<FloatingButtonProps> = ({
         const x = Math.sin(t) * 70;
         const y = Math.sin(t) * Math.cos(t) * 40;
         
-        button.style.transform = `translate(${x}px, ${y}px)`;
+        // 如果按钮被拖拽过，从拖拽后的位置开始运动
+        let finalX = x;
+        let finalY = y;
+        if (isDragged) {
+          finalX += dragOffset.x;
+          finalY += dragOffset.y;
+        }
+        
+        button.style.transform = `translate(${finalX}px, ${finalY}px)`;
         
         animationId = requestAnimationFrame(animate);
       };
@@ -219,6 +336,12 @@ export const FloatingButton: React.FC<FloatingButtonProps> = ({
         x += perturbationX;
         y += perturbationY;
         
+        // 如果按钮被拖拽过，从拖拽后的位置开始运动
+        if (isDragged) {
+          x += dragOffset.x;
+          y += dragOffset.y;
+        }
+        
         button.style.transform = `translate(${x}px, ${y}px)`;
         
         animationId = requestAnimationFrame(animate);
@@ -261,6 +384,11 @@ export const FloatingButton: React.FC<FloatingButtonProps> = ({
     <div 
       ref={buttonRef}
       className={`floating-button ${getAnimationClass()} ${className}`}
+      onMouseDown={handleMouseDown}
+      style={{
+        cursor: isDragging ? 'grabbing' : 'grab',
+        userSelect: 'none'
+      }}
     >
       {children}
     </div>
