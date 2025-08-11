@@ -206,9 +206,105 @@ export const Home: React.FC = () => {
             </FloatingButton>
           </div>
 
+          {/* 黑魂3 GIF 按钮 */}
+          <div className="flex justify-center mb-16">
+            <FloatingButton animationType="sineWave">
+              <Button 
+                variant="ghost" 
+                size="lg" 
+                font="retro"
+                className="relative overflow-hidden bg-transparent border-none hover:bg-transparent transition-all duration-300 p-0 h-auto"
+                onClick={() => window.open('https://www.darksouls3.com', '_blank')}
+              >
+                <img 
+                  src="/gif/darksoul.gif"
+                  alt="Dark Souls 3"
+                  className="block hover:scale-105 transition-transform duration-300"
+                  style={{
+                    width: 'clamp(170px, 40vw, 300px)',
+                    height: 'auto',
+                    maxWidth: '300px',
+                    objectFit: 'contain'
+                  }}
+                />
+              </Button>
+            </FloatingButton>
+          </div>
 
+          {/* 血源 GIF 按钮 */}
+          <div className="flex justify-center mb-16">
+            <FloatingButton animationType="cosineWave">
+              <Button 
+                variant="ghost" 
+                size="lg" 
+                font="retro"
+                className="relative overflow-hidden bg-transparent border-none hover:bg-transparent transition-all duration-300 p-0 h-auto"
+                onClick={() => window.open('https://www.playstation.com/en-us/games/bloodborne/', '_blank')}
+              >
+                <img 
+                  src="/gif/blood-white.png"
+                  alt="Bloodborne"
+                  className="block hover:scale-105 transition-transform duration-300"
+                  style={{
+                    width: 'clamp(170px, 40vw, 300px)',
+                    height: 'auto',
+                    maxWidth: '300px',
+                    objectFit: 'contain'
+                  }}
+                />
+              </Button>
+            </FloatingButton>
+          </div>
 
+          {/* 只狼 GIF 按钮 */}
+          <div className="flex justify-center mb-16">
+            <FloatingButton animationType="rightToLeft">
+              <Button 
+                variant="ghost" 
+                size="lg" 
+                font="retro"
+                className="relative overflow-hidden bg-transparent border-none hover:bg-transparent transition-all duration-300 p-0 h-auto"
+                onClick={() => window.open('https://porsche.com/museum', '_blank')}
+              >
+                <img 
+                  src="/gif/sekiro.gif"
+                  alt="Porsche Museum - 25 Years"
+                  className="block hover:scale-105 transition-transform duration-300"
+                  style={{
+                    width: 'clamp(170px, 40vw, 300px)',
+                    height: 'auto',
+                    maxWidth: '300px',
+                    objectFit: 'contain'
+                  }}
+                />
+              </Button>
+            </FloatingButton>
+          </div>
 
+          {/* 老头环 GIF 按钮 */}
+          <div className="flex justify-center mb-16">
+            <FloatingButton animationType="figure8">
+              <Button 
+                variant="ghost" 
+                size="lg" 
+                font="retro"
+                className="relative overflow-hidden bg-transparent border-none hover:bg-transparent transition-all duration-300 p-0 h-auto"
+                onClick={() => window.open('https://en.bandainamcoent.eu/elden-ring', '_blank')}
+              >
+                <img 
+                  src="/gif/ring.gif"
+                  alt="Elden Ring"
+                  className="block hover:scale-105 transition-transform duration-300"
+                  style={{
+                    width: 'clamp(170px, 40vw, 300px)',
+                    height: 'auto',
+                    maxWidth: '300px',
+                    objectFit: 'contain'
+                  }}
+                />
+              </Button>
+            </FloatingButton>
+          </div>
         </div>
       </div>
     </div>

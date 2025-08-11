@@ -201,50 +201,75 @@ body {
 /* 从左到右的波浪运动 */
 @keyframes floatLeftToRight {
   0% {
-    transform: translate(-50vw, 40px);
+    transform: translate(-30vw, 20px);
   }
   25% {
-    transform: translate(-25vw, -60px);
+    transform: translate(-15vw, -30px);
   }
   50% {
-    transform: translate(0vw, 80px);
+    transform: translate(0vw, 40px);
   }
   75% {
-    transform: translate(25vw, -40px);
+    transform: translate(15vw, -20px);
   }
   100% {
-    transform: translate(50vw, 20px);
+    transform: translate(30vw, 10px);
   }
 }
 
 /* 从右到左的斜线波浪运动 */
 @keyframes floatRightToLeft {
   0% {
-    transform: translate(50vw, -60px);
+    transform: translate(30vw, -30px);
   }
   20% {
-    transform: translate(30vw, 50px);
+    transform: translate(20vw, 25px);
   }
   40% {
-    transform: translate(10vw, -30px);
+    transform: translate(10vw, -15px);
   }
   60% {
-    transform: translate(-10vw, 70px);
+    transform: translate(-10vw, 35px);
   }
   80% {
-    transform: translate(-30vw, -20px);
+    transform: translate(-20vw, -10px);
   }
   100% {
-    transform: translate(-50vw, 40px);
+    transform: translate(-30vw, 20px);
   }
 }
 
 .floating-left-to-right {
-  animation: floatLeftToRight 20s linear infinite;
+  animation: floatLeftToRight 30s linear infinite;
 }
 
 .floating-right-to-left {
-  animation: floatRightToLeft 25s linear infinite;
+  animation: floatRightToLeft 35s linear infinite;
+}
+
+/* 正弦波轨迹样式 */
+.floating-sine-wave {
+  /* 使用JavaScript动画，这里只是占位符 */
+}
+
+/* 余弦波轨迹样式 */
+.floating-cosine-wave {
+  /* 使用JavaScript动画，这里只是占位符 */
+}
+
+/* 螺旋轨迹样式 */
+.floating-spiral {
+  /* 使用JavaScript动画，这里只是占位符 */
+}
+
+/* 8字形轨迹样式 */
+.floating-figure8 {
+  /* 使用JavaScript动画，这里只是占位符 */
+}
+
+/* 不规则运动样式 */
+.floating-irregular {
+  /* 使用JavaScript动画，这里只是占位符 */
 }
 
 @media (prefers-color-scheme: light) {
