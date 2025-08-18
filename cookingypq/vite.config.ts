@@ -27,5 +27,9 @@ export default defineConfig({
     },
     // 确保资源路径正确
     assetsDir: 'assets',
+    // 确保静态资源被正确复制
+    copyPublicDir: true,
   },
+  // 确保静态资源处理
+  publicDir: 'public',
 })

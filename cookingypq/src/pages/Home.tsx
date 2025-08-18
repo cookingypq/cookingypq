@@ -167,7 +167,7 @@ export const Home: React.FC = () => {
                 onClick={() => window.open('https://github.com/cookingypq/NqkXprv', '_blank')}
               >
                 <img 
-                  src="/gif/nockchain.png"
+                  src="/gif/nockchain-shovel.gif"
                   alt="Nockchain Shovel"
                   className="block hover:scale-105 transition-transform duration-300"
                   style={{
@@ -294,6 +294,31 @@ export const Home: React.FC = () => {
                 <img 
                   src="/gif/ring.gif"
                   alt="Elden Ring"
+                  className="block hover:scale-105 transition-transform duration-300"
+                  style={{
+                    width: 'clamp(170px, 40vw, 300px)',
+                    height: 'auto',
+                    maxWidth: '300px',
+                    objectFit: 'contain'
+                  }}
+                />
+              </Button>
+            </FloatingButton>
+          </div>
+
+          {/* Berserk GIF 按钮 */}
+          <div className="flex justify-center mb-16">
+            <FloatingButton animationType="celestialOrbit">
+              <Button 
+                variant="ghost" 
+                size="lg" 
+                font="retro"
+                className="relative overflow-hidden bg-transparent border-none hover:bg-transparent transition-all duration-300 p-0 h-auto"
+                onClick={() => window.open('https://berserk-anime.com', '_blank')}
+              >
+                <img 
+                  src="/gif/GutsVsGriffithBerserk-ezgif.com-loop-count.gif"
+                  alt="Guts vs Griffith - Berserk"
                   className="block hover:scale-105 transition-transform duration-300"
                   style={{
                     width: 'clamp(170px, 40vw, 300px)',
