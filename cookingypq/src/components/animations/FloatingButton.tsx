@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { motion, useMotionValue, useTransform, useAnimationFrame } from 'framer-motion';
 
 interface FloatingButtonProps {
   children: React.ReactNode;
@@ -11,351 +12,133 @@ export const FloatingButton: React.FC<FloatingButtonProps> = ({
   animationType,
   className = ''
 }) => {
-  const buttonRef = useRef<HTMLDivElement>(null);
-  const [isDragging, setIsDragging] = useState(false);
-  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
   const [isDragged, setIsDragged] = useState(false);
+  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
+  const timeRef = useRef(0);
+  
+  // Motion values for smooth animation
+  const x = useMotionValue(0);
+  const y = useMotionValue(0);
 
-  // 拖拽相关状态
-  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
-  const [currentPosition, setCurrentPosition] = useState({ x: 0, y: 0 });
-
-  // 处理鼠标按下事件
-  const handleMouseDown = (e: React.MouseEvent) => {
-    setIsDragging(true);
-    const rect = buttonRef.current?.getBoundingClientRect();
-    if (rect) {
-      setDragStart({
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top
-      });
-    }
-  };
-
-  // 处理鼠标移动事件
-  const handleMouseMove = (e: MouseEvent) => {
-    if (!isDragging || !buttonRef.current) return;
+  // Generate unique orbit parameters for celestialOrbit animation
+  const getUniqueOrbitParams = () => {
+    // Use a stable seed based on component instance
+    const seed = Math.random() * 1000;
     
-    const newX = e.clientX - dragStart.x;
-    const newY = e.clientY - dragStart.y;
-    
-    setCurrentPosition({ x: newX, y: newY });
-    
-    // 实时更新按钮位置
-    buttonRef.current.style.transform = `translate(${newX}px, ${newY}px)`;
-  };
-
-  // 处理鼠标松开事件
-  const handleMouseUp = () => {
-    if (isDragging) {
-      setIsDragging(false);
-      setIsDragged(true);
-      
-      // 保存拖拽后的偏移量
-      setDragOffset(currentPosition);
-      
-      // 重置transform，让动画从新位置开始
-      if (buttonRef.current) {
-        buttonRef.current.style.transform = '';
-      }
-    }
-  };
-
-  // 添加全局鼠标事件监听
-  useEffect(() => {
-    if (isDragging) {
-      document.addEventListener('mousemove', handleMouseMove);
-      document.addEventListener('mouseup', handleMouseUp);
-      
-      return () => {
-        document.removeEventListener('mousemove', handleMouseMove);
-        document.removeEventListener('mouseup', handleMouseUp);
-      };
-    }
-  }, [isDragging, dragStart, currentPosition]);
-
-  // 防止拖拽时选中文本
-  useEffect(() => {
-    if (isDragging) {
-      document.body.style.userSelect = 'none';
-      document.body.style.cursor = 'grabbing';
-    } else {
-      document.body.style.userSelect = '';
-      document.body.style.cursor = '';
-    }
-    
-    return () => {
-      document.body.style.userSelect = '';
-      document.body.style.cursor = '';
+    return {
+      baseSpeed: 0.0007 + (seed % 150) * 0.000004,
+      semiMajorAxis: 90 + (seed % 80) * 1.5,
+      semiMinorAxis: 35 + (seed % 50) * 1.2,
+      eccentricity: 0.1 + (seed % 30) * 0.02,
+      startAngle: (seed % 360) * (Math.PI / 180),
+      orbitOffsetX: (seed % 120) - 60,
+      orbitOffsetY: ((seed + 70) % 120) - 60,
+      perturbationIntensity: 8 + (seed % 25),
+      orbitTilt: (seed % 20) - 10
     };
-  }, [isDragging]);
+  };
 
-  useEffect(() => {
-    if (!buttonRef.current) return;
+  const orbitParams = useRef(getUniqueOrbitParams()).current;
 
-    const button = buttonRef.current;
+  // Animation using framer-motion's useAnimationFrame
+  useAnimationFrame((time) => {
+    timeRef.current = time;
     
-    if (animationType === 'irregular') {
-      // 不规则运动 - 使用随机路径
-      let animationId: number;
-      let startTime: number;
-      
-      const animate = (timestamp: number) => {
-        if (!startTime) startTime = timestamp;
-        const elapsed = timestamp - startTime;
+    let animX = 0;
+    let animY = 0;
+    
+    switch (animationType) {
+      case 'irregular':
+        // 不规则运动 - 使用随机路径
+        animX = Math.sin(time * 0.001) * 100 + Math.sin(time * 0.0007) * 50;
+        animY = Math.cos(time * 0.0008) * 80 + Math.sin(time * 0.0012) * 40;
+        break;
         
-        // 使用多个正弦波创建复杂的运动路径
-        const x = Math.sin(elapsed * 0.001) * 100 + Math.sin(elapsed * 0.0007) * 50;
-        const y = Math.cos(elapsed * 0.0008) * 80 + Math.sin(elapsed * 0.0012) * 40;
+      case 'sineWave':
+        // 正弦波轨迹 - 水平正弦运动，更加平滑
+        animX = Math.sin(time * 0.001) * 80;
+        animY = Math.sin(time * 0.0008) * 40;
+        break;
         
-        // 如果按钮被拖拽过，从拖拽后的位置开始运动
-        let finalX = x;
-        let finalY = y;
-        if (isDragged) {
-          finalX += dragOffset.x;
-          finalY += dragOffset.y;
-        }
+      case 'cosineWave':
+        // 余弦波轨迹 - 垂直余弦运动，更加平滑
+        animX = Math.cos(time * 0.001) * 70;
+        animY = Math.cos(time * 0.0012) * 50;
+        break;
         
-        button.style.transform = `translate(${finalX}px, ${finalY}px)`;
+      case 'spiral':
+        // 螺旋轨迹 - 螺旋形运动，更加平滑
+        const radius = (time * 0.05) % 60;
+        const angle = time * 0.002;
+        animX = Math.cos(angle) * radius;
+        animY = Math.sin(angle) * radius;
+        break;
         
-        animationId = requestAnimationFrame(animate);
-      };
-      
-      animationId = requestAnimationFrame(animate);
-      
-      return () => {
-        if (animationId) {
-          cancelAnimationFrame(animationId);
-        }
-      };
-    } else if (animationType === 'sineWave') {
-      // 正弦波轨迹 - 水平正弦运动，更加平滑
-      let animationId: number;
-      let startTime: number;
-      
-      const animate = (timestamp: number) => {
-        if (!startTime) startTime = timestamp;
-        const elapsed = timestamp - startTime;
+      case 'figure8':
+        // 8字形轨迹 - 8字形运动，更加平滑
+        const t = time * 0.0008;
+        animX = Math.sin(t) * 70;
+        animY = Math.sin(t) * Math.cos(t) * 40;
+        break;
         
-        // 使用更小的振幅和更慢的频率，让动画更舒适
-        const x = Math.sin(elapsed * 0.001) * 80;
-        const y = Math.sin(elapsed * 0.0008) * 40;
-        
-        // 如果按钮被拖拽过，从拖拽后的位置开始运动
-        let finalX = x;
-        let finalY = y;
-        if (isDragged) {
-          finalX += dragOffset.x;
-          finalY += dragOffset.y;
-        }
-        
-        button.style.transform = `translate(${finalX}px, ${finalY}px)`;
-        
-        animationId = requestAnimationFrame(animate);
-      };
-      
-      animationId = requestAnimationFrame(animate);
-      
-      return () => {
-        if (animationId) {
-          cancelAnimationFrame(animationId);
-        }
-      };
-    } else if (animationType === 'cosineWave') {
-      // 余弦波轨迹 - 垂直余弦运动，更加平滑
-      let animationId: number;
-      let startTime: number;
-      
-      const animate = (timestamp: number) => {
-        if (!startTime) startTime = timestamp;
-        const elapsed = timestamp - startTime;
-        
-        // 使用更小的振幅和更慢的频率，让动画更舒适
-        const x = Math.cos(elapsed * 0.001) * 70;
-        const y = Math.cos(elapsed * 0.0012) * 50;
-        
-        // 如果按钮被拖拽过，从拖拽后的位置开始运动
-        let finalX = x;
-        let finalY = y;
-        if (isDragged) {
-          finalX += dragOffset.x;
-          finalY += dragOffset.y;
-        }
-        
-        button.style.transform = `translate(${finalX}px, ${finalY}px)`;
-        
-        animationId = requestAnimationFrame(animate);
-      };
-      
-      animationId = requestAnimationFrame(animate);
-      
-      return () => {
-        if (animationId) {
-          cancelAnimationFrame(animationId);
-        }
-      };
-    } else if (animationType === 'spiral') {
-      // 螺旋轨迹 - 螺旋形运动，更加平滑
-      let animationId: number;
-      let startTime: number;
-      
-      const animate = (timestamp: number) => {
-        if (!startTime) startTime = timestamp;
-        const elapsed = timestamp - startTime;
-        
-        // 使用更小的螺旋半径和更慢的旋转速度
-        const radius = (elapsed * 0.05) % 60;
-        const angle = elapsed * 0.002;
-        const x = Math.cos(angle) * radius;
-        const y = Math.sin(angle) * radius;
-        
-        // 如果按钮被拖拽过，从拖拽后的位置开始运动
-        let finalX = x;
-        let finalY = y;
-        if (isDragged) {
-          finalX += dragOffset.x;
-          finalY += dragOffset.y;
-        }
-        
-        button.style.transform = `translate(${finalX}px, ${finalY}px)`;
-        
-        animationId = requestAnimationFrame(animate);
-      };
-      
-      animationId = requestAnimationFrame(animate);
-      
-      return () => {
-        if (animationId) {
-          cancelAnimationFrame(animationId);
-        }
-      };
-    } else if (animationType === 'figure8') {
-      // 8字形轨迹 - 8字形运动，更加平滑
-      let animationId: number;
-      let startTime: number;
-      
-      const animate = (timestamp: number) => {
-        if (!startTime) startTime = timestamp;
-        const elapsed = timestamp - startTime;
-        
-        // 使用更小的振幅和更慢的频率，让8字形更平滑
-        const t = elapsed * 0.0008;
-        const x = Math.sin(t) * 70;
-        const y = Math.sin(t) * Math.cos(t) * 40;
-        
-        // 如果按钮被拖拽过，从拖拽后的位置开始运动
-        let finalX = x;
-        let finalY = y;
-        if (isDragged) {
-          finalX += dragOffset.x;
-          finalY += dragOffset.y;
-        }
-        
-        button.style.transform = `translate(${finalX}px, ${finalY}px)`;
-        
-        animationId = requestAnimationFrame(animate);
-      };
-      
-      animationId = requestAnimationFrame(animate);
-      
-      return () => {
-        if (animationId) {
-          cancelAnimationFrame(animationId);
-        }
-      };
-    } else if (animationType === 'celestialOrbit') {
-      // 天体公转轨迹 - 每个按钮都有独特的轨道参数
-      let animationId: number;
-      let startTime: number;
-      
-      // 为每个按钮生成独特的轨道参数
-      const getUniqueOrbitParams = () => {
-        // 使用按钮的DOM元素位置来生成独特的种子
-        const rect = button.getBoundingClientRect();
-        const seed = rect.left + rect.top;
-        
-        // 基于种子生成独特的参数，模拟不同行星的轨道特征
-        const baseSpeed = 0.0000007 + (seed % 150) * 0.000004; // 不同的公转速度（内行星快，外行星慢）- 调慢速度
-        const semiMajorAxis = 900 + (seed % 80) * 1.5; // 不同的轨道大小（模拟不同距离）
-        const semiMinorAxis = 35 + (seed % 50) * 1.2;
-        const eccentricity = 0.1 + (seed % 30) * 0.02; // 不同的离心率（模拟轨道椭圆程度）
-        const startAngle = (seed % 360) * (Math.PI / 180); // 不同的起始角度（模拟不同相位）
-        const orbitOffsetX = (seed % 120) - 60; // 不同的轨道中心偏移（模拟不同轨道平面）
-        const orbitOffsetY = ((seed + 70) % 120) - 60;
-        const perturbationIntensity = 8 + (seed % 25); // 不同的扰动强度（模拟引力扰动）
-        const orbitTilt = (seed % 20) - 10; // 轨道倾斜角度
-        
-        return {
-          baseSpeed,
-          semiMajorAxis,
-          semiMinorAxis,
-          eccentricity,
-          startAngle,
-          orbitOffsetX,
-          orbitOffsetY,
-          perturbationIntensity,
-          orbitTilt
-        };
-      };
-      
-      const orbitParams = getUniqueOrbitParams();
-      
-      const animate = (timestamp: number) => {
-        if (!startTime) startTime = timestamp;
-        const elapsed = timestamp - startTime;
-        
-        // 使用独特的参数计算轨道位置
-        const t = elapsed * orbitParams.baseSpeed + orbitParams.startAngle;
+      case 'celestialOrbit':
+        // 天体公转轨迹 - 每个按钮都有独特的轨道参数
+        const orbitTime = time * orbitParams.baseSpeed + orbitParams.startAngle;
         
         // 计算椭圆轨道上的位置
-        let x = orbitParams.semiMajorAxis * Math.cos(t);
-        let y = orbitParams.semiMinorAxis * Math.sin(t);
+        let orbitX = orbitParams.semiMajorAxis * Math.cos(orbitTime);
+        let orbitY = orbitParams.semiMinorAxis * Math.sin(orbitTime);
         
         // 应用离心率，让轨道更椭圆
-        const distance = Math.sqrt(x * x + y * y);
+        const distance = Math.sqrt(orbitX * orbitX + orbitY * orbitY);
         if (distance > 0) {
-          x = x * (1 + orbitParams.eccentricity * Math.cos(t));
-          y = y * (1 + orbitParams.eccentricity * Math.cos(t));
+          orbitX = orbitX * (1 + orbitParams.eccentricity * Math.cos(orbitTime));
+          orbitY = orbitY * (1 + orbitParams.eccentricity * Math.cos(orbitTime));
         }
         
         // 应用轨道倾斜（模拟不同轨道平面的倾斜）
         const tiltRad = orbitParams.orbitTilt * (Math.PI / 180);
-        const xTilted = x * Math.cos(tiltRad) - y * Math.sin(tiltRad);
-        const yTilted = x * Math.sin(tiltRad) + y * Math.cos(tiltRad);
-        x = xTilted;
-        y = yTilted;
+        const xTilted = orbitX * Math.cos(tiltRad) - orbitY * Math.sin(tiltRad);
+        const yTilted = orbitX * Math.sin(tiltRad) + orbitY * Math.cos(tiltRad);
+        orbitX = xTilted;
+        orbitY = yTilted;
         
         // 添加轨道中心偏移
-        x += orbitParams.orbitOffsetX;
-        y += orbitParams.orbitOffsetY;
+        orbitX += orbitParams.orbitOffsetX;
+        orbitY += orbitParams.orbitOffsetY;
         
         // 添加微小的扰动，让运动更自然（模拟引力扰动）
-        const perturbationX = Math.sin(t * 1.5) * orbitParams.perturbationIntensity * 0.5;  // 调慢扰动速度
-        const perturbationY = Math.cos(t * 1) * orbitParams.perturbationIntensity * 0.3;     // 调慢扰动速度
+        const perturbationX = Math.sin(orbitTime * 1.5) * orbitParams.perturbationIntensity * 0.5;
+        const perturbationY = Math.cos(orbitTime * 1) * orbitParams.perturbationIntensity * 0.3;
         
-        x += perturbationX;
-        y += perturbationY;
+        animX = orbitX + perturbationX;
+        animY = orbitY + perturbationY;
+        break;
         
-        // 如果按钮被拖拽过，从拖拽后的位置开始运动
-        if (isDragged) {
-          x += dragOffset.x;
-          y += dragOffset.y;
-        }
-        
-        button.style.transform = `translate(${x}px, ${y}px)`;
-        
-        animationId = requestAnimationFrame(animate);
-      };
-      
-      animationId = requestAnimationFrame(animate);
-      
-      return () => {
-        if (animationId) {
-          cancelAnimationFrame(animationId);
-        }
-      };
+      default:
+        animX = 0;
+        animY = 0;
     }
-  }, [animationType]);
+    
+    // Apply drag offset if the button has been dragged
+    if (isDragged) {
+      animX += dragOffset.x;
+      animY += dragOffset.y;
+    }
+    
+    // Update motion values
+    x.set(animX);
+    y.set(animY);
+  });
+
+  // Handle drag end to save the new position
+  const handleDragEnd = () => {
+    setIsDragged(true);
+    setDragOffset({
+      x: x.get(),
+      y: y.get()
+    });
+  };
 
   const getAnimationClass = () => {
     switch (animationType) {
@@ -381,16 +164,30 @@ export const FloatingButton: React.FC<FloatingButtonProps> = ({
   };
 
   return (
-    <div 
-      ref={buttonRef}
+    <motion.div 
       className={`floating-button ${getAnimationClass()} ${className}`}
-      onMouseDown={handleMouseDown}
       style={{
-        cursor: isDragging ? 'grabbing' : 'grab',
-        userSelect: 'none'
+        x,
+        y,
+        cursor: 'grab'
+      }}
+      drag
+      dragMomentum={false}
+      dragElastic={0.1}
+      onDragEnd={handleDragEnd}
+      whileHover={{ scale: 1.02 }}
+      whileTap={{ scale: 0.98 }}
+      whileDrag={{ 
+        scale: 1.05,
+        cursor: 'grabbing'
+      }}
+      transition={{
+        type: "spring",
+        stiffness: 100,
+        damping: 10
       }}
     >
       {children}
-    </div>
+    </motion.div>
   );
 };
